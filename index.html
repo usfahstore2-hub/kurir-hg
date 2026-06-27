@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Healthy Go - Sistem Kurir Multi Rute</title>
+    <title>Healthy Go - Sistem Kurir</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- CSS SAMA SEPERTI SEBELUMNYA --- */
         :root { --primary: #0c8a5e; --bg: #f4f6f8; --text: #333; --gray: #9ca3af; --route-hijau: #10b981; --route-kuning: #f59e0b; --route-orange: #f97316; --route-biru: #3b82f6; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
@@ -227,6 +226,7 @@
         </div>
     </div>
 
+    <!-- ==================== JAVASCRIPT (FINAL FIX) ==================== -->
     <script>
         // DATA AWAL (LocalStorage)
         let orders = JSON.parse(localStorage.getItem('healthyGoOrdersV2')) || [
@@ -241,7 +241,7 @@
 
         function saveData() { localStorage.setItem('healthyGoOrdersV2', JSON.stringify(orders)); }
 
-        // --- LOGIN LOGIC (INI BAGIAN YANG DIPERBAIKI) ---
+        // --- LOGIN LOGIC (FIXED) ---
         document.getElementById('login-role').addEventListener('change', function() {
             const routeSection = document.getElementById('courier-route-section');
             if(this.value === 'kurir') {
@@ -256,15 +256,14 @@
             const user = document.getElementById('login-user').value;
             const pass = document.getElementById('login-pass').value;
 
-            // Validasi password harus angka 123456
+            // PERBAIKAN PENTING: Validasi password harus angka 123456
             if(pass !== '123456') {
-                alert("Password salah! Harap masukkan: 123456");
+                alert("Password salah! Harap masukkan angka: 123456 (seperti yang tertera di bawah tombol login).");
                 return;
             }
 
             currentUserRole = role;
             
-            // Sembunyikan login, tampilkan footer & logout
             document.getElementById('page-login').classList.remove('active');
             document.getElementById('bottom-bar').classList.remove('hidden');
             document.getElementById('logout-btn').style.display = 'block';
@@ -277,10 +276,6 @@
             } else {
                 // Kurir wajib memilih rute
                 const selectedRoute = document.getElementById('login-route').value;
-                if(!selectedRoute) {
-                    alert("Silakan pilih rute terlebih dahulu!");
-                    return;
-                }
                 currentRoute = selectedRoute;
 
                 document.getElementById('page-kurir').classList.add('active');
@@ -323,4 +318,8 @@
             const item = document.getElementById('inp-item').value.trim();
             const route = document.getElementById('inp-route').value;
 
-            if(!
+            if(!name || !phone || !address || !item) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+            co
