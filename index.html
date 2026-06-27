@@ -6,42 +6,29 @@
     <title>Healthy Go - Sistem Kurir Multi Rute</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- CSS RESET & VARIABLES --- */
-        :root { 
-            --primary: #0c8a5e; 
-            --bg: #f4f6f8; 
-            --text: #333; 
-            --gray: #9ca3af; 
-            --route-hijau: #10b981;
-            --route-kuning: #f59e0b;
-            --route-orange: #f97316;
-            --route-biru: #3b82f6;
-        }
+        /* --- CSS SAMA SEPERTI SEBELUMNYA --- */
+        :root { --primary: #0c8a5e; --bg: #f4f6f8; --text: #333; --gray: #9ca3af; --route-hijau: #10b981; --route-kuning: #f59e0b; --route-orange: #f97316; --route-biru: #3b82f6; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
-
-        /* --- NAVIGASI & HEADER --- */
         .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #e5e7eb; }
         .logo { color: var(--primary); font-family: Georgia, serif; font-weight: bold; font-size: 20px; line-height: 1; cursor: pointer; }
         .logo span { font-size: 10px; display: block; font-weight: normal; }
         .top-icons { display: flex; gap: 15px; align-items: center; font-size: 20px; color: var(--primary); }
         .profile-pic { width: 35px; height: 35px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--primary); cursor: pointer; }
-        
-        /* --- CONTAINER UTAMA --- */
         .container { padding: 15px; max-width: 480px; margin: 0 auto; display: none; }
         .container.active { display: block; }
         .page-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .back-btn { font-size: 20px; cursor: pointer; color: var(--text); }
         
-        /* --- LOGIN PAGE --- */
+        /* LOGIN */
         #page-login { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
         .login-box { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .login-box h2 { margin-bottom: 20px; color: var(--primary); text-align: center; }
-        .login-input { width: 100%; padding: 14px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 15px; font-size: 16px; }
+        .login-input { width: 100%; padding: 14px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 15px; font-size: 16px; background: #fff;}
         .login-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
         .select-route-label { font-size: 14px; font-weight: 500; margin-bottom: 5px; display: block; color: #555;}
-
-        /* --- DASHBOARD & CARD --- */
+        
+        /* DASHBOARD & KARTU */
         .date-header { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-weight: 600; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .stat-card { background: #fff; padding: 12px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
@@ -54,8 +41,6 @@
         .order-card.route-kuning { border-left-color: var(--route-kuning); }
         .order-card.route-orange { border-left-color: var(--route-orange); }
         .order-card.route-biru { border-left-color: var(--route-biru); }
-        .route-badge { font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; color: white; }
-        
         .order-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; }
         .order-id { background: #e6f7ef; padding: 2px 8px; border-radius: 4px; font-size: 12px; color: var(--primary); }
         .order-addr { font-size: 13px; margin-bottom: 10px; color: #555; line-height: 1.4; display: flex; gap: 10px; }
@@ -65,50 +50,44 @@
         .btn-primary { background: var(--primary); color: #fff; border: none; }
         .btn-primary:active { background: #0a704b; }
 
-        /* --- FORM INPUT ADMIN --- */
+        /* ADMIN FORM */
         .admin-form-group { margin-bottom: 15px; }
         .admin-form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
         .admin-input, .admin-select { width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 14px; background: #fff; }
-        .admin-select { cursor: pointer; }
         .btn-add-order { width: 100%; padding: 12px; background: var(--primary); color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 10px; }
         
-        /* --- FORM UPLOAD KURIR --- */
+        /* FORM UPLOAD */
         .form-control { width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; background: #fff; }
         .upload-area { border: 2px dashed var(--primary); border-radius: 8px; padding: 40px 20px; text-align: center; background: #f8fafc; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
         .upload-area:hover { background: #e6f7ef; }
         .upload-area i { font-size: 40px; color: var(--primary); margin-bottom: 10px; }
-        .upload-area p { color: var(--gray); font-size: 12px; }
         .radio-group { display: flex; gap: 20px; margin-top: 5px; }
         .radio-group label { display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer; }
         .checkbox-group { display: flex; gap: 10px; align-items: flex-start; margin: 20px 0; }
         .checkbox-group input { margin-top: 3px; accent-color: var(--primary); width: 18px; height: 18px; }
         #imagePreview { max-width: 100%; max-height: 200px; margin-top: 10px; border-radius: 8px; display: none; }
         
-        /* --- BOTTOM BAR --- */
+        /* BOTTOM BAR */
         .bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e5e7eb; z-index: 100; max-width: 480px; left: 50%; transform: translateX(-50%); }
         .bottom-bar .btn { flex: 0 1 auto; padding: 8px 20px; }
         
-        /* --- ELEMEN SEMBUNYI --- */
-        #fileInput { display: none; }
         .hidden { display: none !important; }
         .btn-logout { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
     </style>
 </head>
 <body>
-
-    <!-- HEADER -->
     <header class="top-bar">
         <div class="logo" onclick="goHome()">healthy<br><span>go</span></div>
         <div class="top-icons">
             <button class="btn-logout" id="logout-btn" style="display:none;" onclick="logout()">Logout</button>
-            <div class="profile-pic" onclick="toggleAdminMode()">
+            <div class="profile-pic">
                 <i class="fas fa-user-shield" id="admin-icon" style="display:none; color:#f59e0b;"></i>
                 <i class="fas fa-user" id="kurir-icon"></i>
             </div>
         </div>
     </header>
 
-    <!-- ==================== HALAMAN LOGIN ==================== -->
+    <!-- HALAMAN LOGIN -->
     <div id="page-login" class="container active">
         <div class="login-box">
             <div style="text-align: center; margin-bottom: 10px;">
@@ -139,7 +118,7 @@
         </div>
     </div>
 
-    <!-- ==================== HALAMAN DASHBOARD KURIR ==================== -->
+    <!-- DASHBOARD KURIR -->
     <div id="page-kurir" class="container">
         <div class="date-header"><i class="fas fa-calendar-alt" style="color:var(--primary);"></i> <span id="current-date"></span> <span id="route-label" style="margin-left:auto; background:#ddd; padding:2px 8px; border-radius:4px; font-size:12px;"></span></div>
         <div class="stats-grid">
@@ -155,7 +134,7 @@
         </div>
     </div>
 
-    <!-- ==================== HALAMAN ADMIN (INPUT DATA) ==================== -->
+    <!-- PANEL ADMIN -->
     <div id="page-admin" class="container">
         <div class="page-title"><i class="fas fa-database" style="color:var(--primary);"></i> Panel Admin</div>
         <p style="color:var(--gray); margin-bottom: 20px;">Tambahkan pesanan customer dan tentukan rutenya.</p>
@@ -188,13 +167,12 @@
             </div>
             <button class="btn-add-order" onclick="addNewOrder()"><i class="fas fa-plus-circle"></i> Tambah Pesanan</button>
         </div>
-
         <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e5e7eb;">
         <h4>Daftar Semua Pesanan</h4>
         <div id="admin-list-container" style="margin-top: 10px;"></div>
     </div>
 
-    <!-- ==================== HALAMAN DETAIL & FORM KURIR ==================== -->
+    <!-- DETAIL & KONFIRMASI KIRIM -->
     <div id="page-detail" class="container">
         <div class="page-title"><i class="fas fa-arrow-left back-btn" onclick="goHome()"></i> Detail Pengantaran</div>
         <div class="detail-card" style="background:#fff; border-radius:8px; padding:20px; box-shadow:0 2px 4px rgba(0,0,0,0.05);" id="detail-card-container"></div>
@@ -249,37 +227,44 @@
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT (LOGIC APP) ==================== -->
     <script>
-        // --- 1. DATABASE SEMENTARA (LOCAL STORAGE) ---
+        // DATA AWAL (LocalStorage)
         let orders = JSON.parse(localStorage.getItem('healthyGoOrdersV2')) || [
             { id: 1, name: "Johan Adisurya", item: "1 Dinner", phone: "628122692340", address: "Perum Griya Indah, Bantul", route: "Hijau", delivered: false },
-            { id: 2, name: "Rumaisha Azzahra", item: "1 Dinner", phone: "628985051919", address: "Suryodiningratan No.772, Mantrijeron", route: "Biru", delivered: false },
-            { id: 3, name: "Edwin Ananto", item: "1 Lunch", phone: "6282134925065", address: "Perum Green Garden, Ngestiharjo", route: "Kuning", delivered: false },
-            { id: 4, name: "Indah Arini", item: "1 Dinner", phone: "6285640342040", address: "Sonosewu Baru No.448", route: "Orange", delivered: false }
+            { id: 2, name: "Rumaisha Azzahra", item: "1 Dinner", phone: "628985051919", address: "Suryodiningratan No.772", route: "Biru", delivered: false },
+            { id: 3, name: "Edwin Ananto", item: "1 Lunch", phone: "6282134925065", address: "Perum Green Garden", route: "Kuning", delivered: false }
         ];
 
         let currentOrderIndex = null;
-        let currentUserRole = null; // 'admin' atau 'kurir'
-        let currentRoute = null;    // Warna rute kurir yang login
+        let currentUserRole = null; 
+        let currentRoute = null;    
 
-        // Simpan data ke LocalStorage setiap kali ada perubahan
-        function saveData() {
-            localStorage.setItem('healthyGoOrdersV2', JSON.stringify(orders));
-        }
+        function saveData() { localStorage.setItem('healthyGoOrdersV2', JSON.stringify(orders)); }
 
-        // --- 2. LOGIN LOGIC ---
+        // --- LOGIN LOGIC (INI BAGIAN YANG DIPERBAIKI) ---
+        document.getElementById('login-role').addEventListener('change', function() {
+            const routeSection = document.getElementById('courier-route-section');
+            if(this.value === 'kurir') {
+                routeSection.style.display = 'block';
+            } else {
+                routeSection.style.display = 'none';
+            }
+        });
+
         function handleLogin() {
             const role = document.getElementById('login-role').value;
             const user = document.getElementById('login-user').value;
             const pass = document.getElementById('login-pass').value;
 
+            // Validasi password harus angka 123456
             if(pass !== '123456') {
-                alert("Password salah! Gunakan: 123456");
+                alert("Password salah! Harap masukkan: 123456");
                 return;
             }
 
             currentUserRole = role;
+            
+            // Sembunyikan login, tampilkan footer & logout
             document.getElementById('page-login').classList.remove('active');
             document.getElementById('bottom-bar').classList.remove('hidden');
             document.getElementById('logout-btn').style.display = 'block';
@@ -290,8 +275,12 @@
                 document.getElementById('kurir-icon').style.display = 'none';
                 renderAdminList();
             } else {
-                // Kurir harus memilih rute
+                // Kurir wajib memilih rute
                 const selectedRoute = document.getElementById('login-route').value;
+                if(!selectedRoute) {
+                    alert("Silakan pilih rute terlebih dahulu!");
+                    return;
+                }
                 currentRoute = selectedRoute;
 
                 document.getElementById('page-kurir').classList.add('active');
@@ -305,15 +294,6 @@
             }
         }
 
-        // Logic untuk menampilkan pilihan rute jika memilih Kurir
-        document.getElementById('login-role').addEventListener('change', function() {
-            if(this.value === 'kurir') {
-                document.getElementById('courier-route-section').style.display = 'block';
-            } else {
-                document.getElementById('courier-route-section').style.display = 'none';
-            }
-        });
-
         function logout() {
             currentUserRole = null;
             currentRoute = null;
@@ -325,4 +305,22 @@
 
         function goHome() {
             if(currentUserRole === 'admin') {
- 
+                document.querySelectorAll('.container').forEach(el => el.classList.remove('active'));
+                document.getElementById('page-admin').classList.add('active');
+                renderAdminList();
+            } else {
+                document.querySelectorAll('.container').forEach(el => el.classList.remove('active'));
+                document.getElementById('page-kurir').classList.add('active');
+                renderDashboard();
+            }
+        }
+
+        // --- LOGIC ADMIN ---
+        function addNewOrder() {
+            const name = document.getElementById('inp-name').value.trim();
+            const phone = document.getElementById('inp-phone').value.trim();
+            const address = document.getElementById('inp-address').value.trim();
+            const item = document.getElementById('inp-item').value.trim();
+            const route = document.getElementById('inp-route').value;
+
+            if(!
